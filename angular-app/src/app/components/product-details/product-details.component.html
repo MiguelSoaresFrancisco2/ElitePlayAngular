@@ -1,0 +1,28 @@
+<main role="main" class="container">
+    <h1>{{ product.name }}</h1>
+    
+    <div *ngIf="product.image">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-4" style="max-width: 100%; height: auto;">
+    </div>
+    
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price }} €</p>
+    <p>Stock: {{ product.stock_quantity }} unidades</p>
+
+    <hr>
+    <h2>Reviews</h2>
+    <div *ngIf="reviews.length > 0; else noReviews" >
+        <ul>
+            <div *ngFor="let review of reviews">
+                <li>
+                    <strong>{{ review.author }}</strong> - {{ review.created_date|date:"d M Y" }}<br>
+                    Rating: {{ review.rating }}/5<br>
+                    {{ review.text }}
+                </li>
+            </div>
+        </ul>
+    </div>
+    <ng-template #noReviews>
+        <p>Este produto ainda não tem reviews.</p>
+    </ng-template>
+</main>
