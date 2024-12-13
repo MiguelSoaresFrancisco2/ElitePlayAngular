@@ -29,4 +29,7 @@ export class ApiService {
   placeOrder(orderData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/orders/`, orderData);
   }
+  getProductsByCategory(category: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/products/category/${category}`);
+  }
 }

@@ -1,15 +1,12 @@
-<div class="product-list">
-    <h1>Lista de Produtos</h1>
-    <div *ngIf="products.length > 0; else noProducts">
-      <div *ngFor="let product of products">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <strong>Preço: {{ product.price | currency }}</strong>
-        <a routerLink="/product/{{product.slug}}">View details</a>
-      </div>
-    </div>
-    <ng-template #noProducts>
-      <p>Nenhum produto disponível.</p>
-    </ng-template>
+<div>  <h2>Produtos na categoria: {{ category }}</h2>
+</div>
+<div *ngIf="products.length > 0; else noProducts">
+  <h2>Produtos na categoria: {{ category }}</h2>
+  <div *ngFor="let product of products">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
   </div>
-  
+</div>
+<ng-template #noProducts>
+  <p>Nenhum produto encontrado nesta categoria.</p>
+</ng-template>
