@@ -1,1 +1,270 @@
-/* You can add global styles to this file, and also import other style files */
+﻿/* Estrutura Principal */
+body, html {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    padding-top: 80px; /* Espaço para a navbar */
+}
+
+/* Navbar */
+.navbar-custom {
+    background: linear-gradient(to right, #ff0000, #000000);
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.navbar-custom .nav-item {
+    padding: 0 15px;
+}
+
+.navbar-custom .nav-link {
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #ffcccc;
+}
+
+/* Footer */
+.footer-custom {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-custom a {
+    color: #ffcccc;
+    transition: color 0.3s;
+}
+
+.footer-custom a:hover {
+    color: #ffffff;
+}
+
+/* Cards de Produtos */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Altura total do card */
+    max-width: 300px; /* Define uma largura máxima para os cards */
+    margin: 15px; /* Espaçamento entre os cards */
+} 
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 180px; /* Define uma altura fixa mais adequada */
+    object-fit: cover; /* Ajusta a imagem para cobrir o card */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.product-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem de linha em dispositivos menores */
+    justify-content: space-around;
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Formulários */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.form-control:focus {
+    border-color: #ff0000;
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-custom .navbar-nav {
+        text-align: center;
+    }
+
+    .footer-custom {
+        font-size: 0.9em;
+    }
+}
+
+
+.category-header {
+    font-size: 2rem; /* Aumenta o tamanho da fonte para dar mais destaque */
+    font-weight: bold; /* Deixa o texto em negrito */
+    color: #333; /* Cor do texto */
+    margin: 20px 0; /* Margem superior e inferior para espaçamento */
+    padding: 10px 0; /* Padding superior e inferior para dar mais espaço ao redor do texto */
+    background: linear-gradient(to right, #ff0000, #000000); /* Gradiente de fundo para destaque */
+    color: #ffffff; /* Cor do texto para contrastar com o fundo */
+    text-align: center; /* Centraliza o texto */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+
+
+/* Fundo em gradiente para a página */
+body {
+    background: linear-gradient(to right, #2c2c2c, #1a1a1a);
+    color: #f0f0f0; /* Cor do texto para melhor contraste */
+    padding-top: 80px; /* Mantém o espaçamento para a navbar */
+    padding-bottom: 0;
+}
+
+/* Fundo personalizado para o conteúdo principal */
+.container {
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo semi-transparente para destacar o conteúdo */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Estilo dos cards */
+.card {
+    background-color: #333333; /* Fundo mais escuro para os cards */
+    color: #ffffff;
+    border: 1px solid #444444; /* Borda sutil para os cards */
+    border-radius: 10px; /* Borda arredondada para dar um visual moderno */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar os cards */
+}
+
+.card h3 {
+    color: #ff4c4c; /* Título dos cards em vermelho para contraste */
+}
+
+.card .btn-primary {
+    background-color: #ff4c4c;
+    border: none;
+}
+
+.card .btn-primary:hover {
+    background-color: #ff6666; /* Efeito hover para os botões */
+}
+
+/* Ajuste para o texto do cabeçalho */
+h2, .category-header {
+    color: #ff4c4c;
+    text-align: center;
+}
+
+/* Ajustes para links do site */
+a {
+    color: #ff6666;
+}
+
+a:hover {
+    color: #ff4c4c;
+}
+
+/* Estilo para o footer */
+.footer-custom {
+    background-color: #222222;
+    color: #cccccc;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-custom a {
+    color: #ff6666;
+    text-decoration: none;
+}
+
+.footer-custom a:hover {
+    color: #ff4c4c;
+}
+
+
+/* Texto e bordas em branco para tabelas */
+table.table {
+    color: #ffffff; /* Define a cor do texto como branco */
+    border-color: #444444; /* Borda mais clara para destacar */
+}
+
+table.table th, table.table td {
+    color: #ffffff; /* Texto das células em branco */
+    border-color: #444444; /* Borda para as células */
+}
+
+table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo leve para linhas ímpares */
+}
+
+table.table-striped tbody tr:nth-of-type(even) {
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo um pouco mais claro para linhas pares */
+}
+
+/* Estilo dos botões */
+.btn-success, .btn-primary, .btn-danger {
+    color: #ffffff;
+    border: none;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+
+.large-card {
+    transform: scale(1.2); /* Aumenta o tamanho do card em 20% */
+    transition: transform 0.3s ease; /* Suaviza o efeito de escala */
+}
+
+.large-card:hover {
+    transform: scale(1.25); /* Aumenta ainda mais ao passar o mouse, opcional */
+}
