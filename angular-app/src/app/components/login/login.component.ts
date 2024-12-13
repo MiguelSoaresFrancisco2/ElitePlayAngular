@@ -28,6 +28,7 @@ export class LoginComponent {
       next: (response) => {
         this.authService.setToken(response.token); // Salva o token no localStorage
         this.router.navigate(['/']); // Redireciona o usuário para a página inicial
+        localStorage.setItem('username',this.username)
       },
       error: () => {
         this.error = 'Usuário ou senha incorretos.'; // Exibe mensagem de erro em caso de falha

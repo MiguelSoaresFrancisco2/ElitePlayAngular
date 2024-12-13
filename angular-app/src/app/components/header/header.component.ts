@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
@@ -21,9 +24,9 @@ export class HeaderComponent {
   checkUserLoggedIn(): void {
     // Simule a verificação de autenticação ou use um serviço de autenticação real
     const user = localStorage.getItem('username'); // Substitua pelo serviço real
-    if (user) {
-      this.username = user;
-    }
+      if (user) {
+        this.username = user;
+      }
   }
 
   /**
