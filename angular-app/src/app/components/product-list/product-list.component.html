@@ -5,6 +5,7 @@
         <h2>{{ product.name }}</h2>
         <p>{{ product.description }}</p>
         <strong>Preço: {{ product.price | currency }}</strong>
+        <a routerLink="/product/{{product.slug}}">View details</a>
       </div>
     </div>
     <ng-template #noProducts>
