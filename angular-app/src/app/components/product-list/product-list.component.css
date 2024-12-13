@@ -1,0 +1,33 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Altura total do card */
+    max-width: 300px; /* Define uma largura máxima para os cards */
+    margin: 15px; /* Espaçamento entre os cards */
+} 
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 180px; /* Define uma altura fixa mais adequada */
+    object-fit: cover; /* Ajusta a imagem para cobrir o card */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.product-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem de linha em dispositivos menores */
+    justify-content: space-around;
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: #333;
+}

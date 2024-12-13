@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service'; // Certifique-se de que o caminho está correto
 
 @Component({
   selector: 'app-header',
@@ -8,34 +9,22 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
-  // Variável para armazenar o nome do usuário
-  username: string | null = 'User'; // Pode ser substituído pela lógica real de autenticação
+export class HeaderComponent implements OnInit {
+  username: string | null = null; // Inicialmente nulo
+  isAuthenticated: boolean = false; // Estado de autenticação
 
-  constructor() {
-    // Aqui você pode carregar informações do usuário logado (se houver um serviço de autenticação)
-    this.checkUserLoggedIn();
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // Inscreva-se nas mudanças de autenticação
+    this.authService.getAuthStatus().subscribe((status) => {
+      this.isAuthenticated = status;
+      this.username = this.isAuthenticated ? localStorage.getItem('username') : null; // Atualiza o nome do usuário
+    });
   }
 
-  /**
-   * Verifica se o usuário está autenticado e define o username.
-   * Você pode usar um serviço de autenticação aqui para obter as informações reais.
-   */
-  checkUserLoggedIn(): void {
-    // Simule a verificação de autenticação ou use um serviço de autenticação real
-    const user = localStorage.getItem('username'); // Substitua pelo serviço real
-      if (user) {
-        this.username = user;
-      }
-  }
-
-  /**
-   * Lógica para fazer logout
-   */
   logout(): void {
-    // Simule o logout ou use o serviço real
-    console.log('Usuário desconectado.');
-    localStorage.removeItem('username'); // Limpe os dados de autenticação simulados
-    this.username = null; // Redefina o estado do usuário
+    this.authService.logout(); // Chama o método de logout do AuthService
+    this.username = null; // Redefine o nome do usuário
   }
 }

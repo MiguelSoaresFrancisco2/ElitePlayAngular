@@ -10,18 +10,22 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit { // Implementa OnInit
-  products: any[] = [];
-  category: string = '';
+export class ProductListComponent implements OnInit {
+  products: any[] = []; // Array para armazenar os produtos
+  category: string = ''; // Variável para armazenar a categoria
 
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.category = this.route.snapshot.params['category']; // Captura a categoria da rota
-    this.loadProducts(); // Chama o método para carregar os produtos
+    // Inscreve-se nas mudanças de parâmetros da rota
+    this.route.params.subscribe(params => {
+      this.category = params['category']; // Captura a categoria da rota
+      this.loadProducts(); // Chama o método para carregar os produtos
+    });
   }
 
   loadProducts(): void {
+    // Chama o serviço para obter produtos pela categoria
     this.apiService.getProductsByCategory(this.category).subscribe({
       next: (data) => {
         this.products = data; // Supondo que a API retorne os produtos da categoria
@@ -29,6 +33,6 @@ export class ProductListComponent implements OnInit { // Implementa OnInit
       error: (error) => {
         console.error('Erro ao carregar produtos:', error); // Tratamento de erro
       }
-  });
+    });
   }
 }

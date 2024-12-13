@@ -1,74 +1,73 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top navbar-custom">
-      <a class="navbar-brand" routerLink="/">
-        <img src="assets/images/ELITEPLAY.png" alt="Logo" style="height: 60px; width: auto; margin-left: 10px;">
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarDefault"
-        aria-controls="navbarDefault"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarDefault">
-        <ul class="navbar-nav mr-auto">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top navbar-custom">
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/images/ELITEPLAY.png" alt="Logo" style="height: 60px; width: auto; margin-left: 10px;">
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarDefault"
+      aria-controls="navbarDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/products/category/games']">Games</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/products/category/computers']">Computers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/products/category/consoles']">Consoles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/products/category/monitors']">Monitors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/products/category/accessories']">Accessories & Peripherals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+        </li>
+        <div *ngIf="isAuthenticated">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/">Home</a>
+            <a class="nav-link" [routerLink]="['/orders']">My Orders</a>
+          </li>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search products" aria-label="Search" />
+          <button class="btn btn-outline-light ml-2" type="submit">Search</button>
+        </form>
+        <div *ngIf="isAuthenticated">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/cart" style="color: inherit; font-size: 1.5em;">
+              <i class="bi bi-bag-fill"></i>
+            </a>
+          </li>
+        </div>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <div *ngIf="isAuthenticated; else notLoggedIn">
+          <li class="nav-item">
+            <span class="navbar-text">Bem-vindo, {{ username }}</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products/games">Games</a>
+            <button class="btn btn-outline-light ml-2" (click)="logout()">Logout</button>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/products/computers">Computers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/products/consoles">Consoles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/products/monitors">Monitors</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/products/accessories">Accessories & Peripherals</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/admin">Admin</a>
-          </li>
-          <div *ngIf="username">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/orders">My Orders</a>
-            </li>
-          </div>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search products" aria-label="Search" />
-            <button class="btn btn-outline-light ml-2" type="submit">Search</button>
-          </form>
-          <div *ngIf="username">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/cart" style="color: inherit; font-size: 1.5em;">
-                <i class="bi bi-bag-fill"></i>
-              </a>
-            </li>
-          </div>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <div *ngIf="username; else notLoggedIn">
-            <li class="nav-item">
-              <span class="navbar-text">Bem-vindo, {{ username }}</span>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-outline-light ml-2" (click)="logout()">Logout</button>
-            </li>
-          </div>
-          <ng-template #notLoggedIn>
-            <a routerLink="login" class="btn btn-outline-light ml-2">Login</a>
-          </ng-template>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  
+        </div>
+        <ng-template #notLoggedIn>
+          <a routerLink="login" class="btn btn-outline-light ml-2">Login</a>
+        </ng-template>
+      </ul>
+    </div>
+  </nav>
+</header>
