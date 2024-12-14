@@ -1,0 +1,77 @@
+<main role="main" class="container">
+    <h2>Checkout</h2>
+  
+    <div *ngIf="cartItems && cartItems.length > 0; else emptyCart">
+      <h3>Order Summary</h3>
+      <ul class="list-group mb-4">
+        <li
+          *ngFor="let item of cartItems"
+          class="list-group-item d-flex justify-content-between align-items-center text-dark-bg"
+        >
+          <span>
+            {{ item.product.name }} - {{ item.quantity }} x {{ item.product.price | currency:'EUR' }}
+            = {{ item.totalPrice | currency:'EUR' }}
+          </span>
+        </li>
+      </ul>
+      <p>Subtotal: {{ subtotal | currency:'EUR' }}</p>
+      <p>Tax (5%): {{ tax | currency:'EUR' }}</p>
+      <p>Shipping: {{ shipping | currency:'EUR' }}</p>
+      <p><strong>Total: {{ total | currency:'EUR' }}</strong></p>
+  
+      <h3>Payment Information</h3>
+      <form (submit)="processCheckout($event)">
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input
+            type="text"
+            id="cardNumber"
+            [(ngModel)]="payment.cardNumber"
+            name="cardNumber"
+            class="form-control"
+            required
+            pattern="\\d{16}"
+            maxlength="16"
+            placeholder="Enter 16-digit card number"
+          />
+          <small class="form-text text-muted">Card number must be 16 digits.</small>
+        </div>
+  
+        <div class="form-group">
+          <label for="expirationDate">Expiration Date</label>
+          <input
+            type="month"
+            id="expirationDate"
+            [(ngModel)]="payment.expirationDate"
+            name="expirationDate"
+            class="form-control"
+            required
+          />
+          <small class="form-text text-muted">Expiration date must be in the current month or in the future.</small>
+        </div>
+  
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input
+            type="text"
+            id="cvv"
+            [(ngModel)]="payment.cvv"
+            name="cvv"
+            class="form-control"
+            required
+            pattern="\\d{3}"
+            maxlength="3"
+            placeholder="3-digit CVV"
+          />
+          <small class="form-text text-muted">CVV must be 3 digits.</small>
+        </div>
+  
+        <button type="submit" class="btn btn-success">Confirm Payment</button>
+      </form>
+    </div>
+  
+    <ng-template #emptyCart>
+      <p>Your cart is empty. <a routerLink="/">Continue shopping</a></p>
+    </ng-template>
+  </main>
+  
