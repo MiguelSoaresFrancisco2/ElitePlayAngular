@@ -1,0 +1,22 @@
+<div class="cart">
+    <h2>Your Shopping Cart</h2>
+    <div *ngIf="cartItems.length > 0; else emptyCart">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <p>{{ item.name }} - {{ item.price | currency }}</p>
+        <div class="quantity-controls">
+          <button class="btn btn-secondary btn-sm" (click)="decrementQuantity(item.id)">-</button>
+          <span class="quantity">{{ item.quantity }}</span>
+          <button class="btn btn-secondary btn-sm" (click)="incrementQuantity(item.id)">+</button>
+        </div>
+        <button class="btn btn-danger btn-sm" (click)="removeFromCart(item.id)">
+          Remove
+        </button>
+      </div>
+      <h3>Total: {{ total | currency }}</h3>
+      <button class="btn btn-primary">Proceed to Checkout</button>
+    </div>
+    <ng-template #emptyCart>
+      <p>Your cart is empty.</p>
+    </ng-template>
+  </div>
+  

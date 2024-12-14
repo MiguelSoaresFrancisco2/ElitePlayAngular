@@ -1,29 +1,101 @@
+<div *ngIf="notificationMessage" class="notification">
+    {{ notificationMessage }}
+  </div>
 <main role="main" class="container">
     <h1>{{ product.name }}</h1>
-    
+  
+    <!-- Imagem do Produto -->
     <div *ngIf="product.image">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-4" style="max-width: 100%; height: auto;">
+      <img
+        [src]="product.image.url"
+        alt="{{ product.name }}"
+        class="img-fluid mb-4"
+        style="max-width: 100%; height: auto;"
+      />
     </div>
-    
+  
+    <!-- Detalhes do Produto -->
     <p>{{ product.description }}</p>
     <p>Price: {{ product.price }} €</p>
     <p>Stock: {{ product.stock_quantity }} unidades</p>
-
-    <hr>
+  
+    <!-- Adicionar ao Carrinho -->
+    <div>
+      <label for="quantity">Quantidade:</label>
+      <input
+        id="quantity"
+        type="number"
+        [(ngModel)]="quantity"
+        min="1"
+        [max]="product.stock_quantity"
+        class="form-control mb-3"
+        style="width: 100px;"
+      />
+    </div>
+    <button
+      class="btn btn-primary mb-3"
+      (click)="addToCart()"
+      [disabled]="product.stock_quantity === 0 || quantity < 1"
+    >
+      Add to Cart
+    </button>
+    <p *ngIf="product.stock_quantity === 0" class="text-danger">
+      Produto fora de stock.
+    </p>
+    
+    <hr />
+  
+    <!-- Reviews -->
     <h2>Reviews</h2>
-    <div *ngIf="reviews.length > 0; else noReviews" >
-        <ul>
-            <div *ngFor="let review of reviews">
-                <li>
-                    <strong>{{ review.author }}</strong> - {{ review.created_date|date:"d M Y" }}<br>
-                    Rating: {{ review.rating }}/5<br>
-                    {{ review.text }}
-                </li>
-            </div>
-        </ul>
+    <div *ngIf="reviews.length > 0; else noReviews">
+      <ul>
+        <div *ngFor="let review of reviews">
+          <li>
+            <strong>{{ review.author }}</strong> - {{ review.created_date | date: 'd M Y' }}<br />
+            Rating: {{ review.rating }}/5<br />
+            {{ review.text }}
+          </li>
+        </div>
+      </ul>
     </div>
     <ng-template #noReviews>
-        <p>Este produto ainda não tem reviews.</p>
+      <p>Este produto ainda não tem reviews.</p>
     </ng-template>
-    <a routerLink="">Return to home</a>
+
+    <!-- Adicionar Nova Review -->
+    <hr />
+    <h2>Adicionar Review</h2>
+    <form *ngIf="isAuthenticated; else loginPrompt" (submit)="submitReview()">
+      <div class="form-group">
+        <label for="reviewRating">Avaliação:</label>
+        <select
+          id="reviewRating"
+          [(ngModel)]="reviewRating"
+          name="rating"
+          class="form-control"
+          required
+        >
+          <option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">{{ r }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="reviewText">Comentário:</label>
+        <textarea
+          id="reviewText"
+          [(ngModel)]="reviewText"
+          name="text"
+          class="form-control"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar Review</button>
+    </form>
+    <ng-template #loginPrompt>
+        <p>Você precisa estar logado para adicionar uma review.</p>
+        <button class="btn btn-primary" (click)="navigateToLogin()">Login</button>
+    </ng-template>
+      
+  
+    <!-- Link para Voltar -->
+    <a routerLink="/">Return to Home</a>
 </main>

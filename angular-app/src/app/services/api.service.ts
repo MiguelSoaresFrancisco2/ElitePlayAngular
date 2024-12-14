@@ -32,4 +32,30 @@ export class ApiService {
   getProductsByCategory(category: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/products/category/${category}`);
   }
+
+  getProductsByName(query: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/products/search/`, { params: { search: query } });
+  }
+  
+  getFilteredProducts(filters: { search: string; category: string; inStock: boolean }): Observable<any> {
+    let params: any = {};
+    if (filters.search) params.search = filters.search;
+    if (filters.category) params.category = filters.category;
+    if (filters.inStock) params.inStock = filters.inStock.toString();
+  
+    return this.http.get(`${this.apiUrl}/products/`, { params });
+  }
+  getReviews(productSlug: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/products/${productSlug}/reviews/`);
+  }
+    
+  createReview(slug: string, reviewData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/products/${slug}/reviews/`, reviewData);
+  }
+  
+  
+  
+  
+
+
 }

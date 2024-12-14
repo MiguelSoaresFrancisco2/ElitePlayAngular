@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Necessário para *ngIf
 import { FormsModule } from '@angular/forms'; // Necessário para [(ngModel)]
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +15,18 @@ export class LoginComponent {
   username: string = ''; // Campo de entrada para o nome do usuário
   password: string = ''; // Campo de entrada para a senha
   error: string | null = null; // Para exibir mensagens de erro
+  returnUrl: string = '/'; // URL padrão de redirecionamento
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    // Obtém o parâmetro 'returnUrl' da rota, se existir
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
   /**
    * Lida com o envio do formulário de login
@@ -27,8 +37,8 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         this.authService.setToken(response.token); // Salva o token no localStorage
-        this.router.navigate(['/']); // Redireciona o usuário para a página inicial
-        localStorage.setItem('username',this.username)
+        this.router.navigateByUrl(this.returnUrl); // Redireciona o usuário para a página anterior ou home
+        localStorage.setItem('username', this.username);
       },
       error: () => {
         this.error = 'Usuário ou senha incorretos.'; // Exibe mensagem de erro em caso de falha

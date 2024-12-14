@@ -1,5 +1,52 @@
-<div *ngIf="products.length > 0; else noProducts">
-  <h2>Produtos na categoria: {{ category }}</h2>
+<div *ngIf="products.length > 0 || (filtersActive && !category); else noProducts">
+  <!-- Filtros -->
+  <div *ngIf="filtersActive && !category" class="filters">
+    <form (submit)="applyFilters($event)">
+      <div>
+        <label for="search">Search products</label>
+        <input
+          id="search"
+          type="text"
+          [(ngModel)]="filters.search"
+          name="search"
+          placeholder="Search products"
+        />
+      </div>
+
+      <div>
+        <label for="category">Categoria</label>
+        <select id="category" [(ngModel)]="filters.category" name="category">
+          <option value="">Todas as categorias</option>
+          <option *ngFor="let category of categories" [value]="category.slug">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="filters.inStock"
+            name="inStock"
+          />
+          Disponível em stock
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+    </form>
+  </div>
+
+  <!-- Títulos -->
+  <h2 *ngIf="category; else allProducts">
+    Produtos na categoria: {{ category }}
+  </h2>
+  <ng-template #allProducts>
+    <h2>Todos os Produtos</h2>
+  </ng-template>
+
+  <!-- Lista de Produtos -->
   <div class="row">
     <div class="col-md-4" *ngFor="let product of products">
       <div class="card mb-4 shadow-sm">
@@ -22,6 +69,8 @@
     </div>
   </div>
 </div>
+
 <ng-template #noProducts>
-  <p>Nenhum produto encontrado nesta categoria.</p>
+  <p *ngIf="category">Nenhum produto encontrado nesta categoria.</p>
+  <p *ngIf="!category">Nenhum produto disponível.</p>
 </ng-template>

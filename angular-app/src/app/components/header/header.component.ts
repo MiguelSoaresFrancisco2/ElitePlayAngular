@@ -1,30 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service'; // Certifique-se de que o caminho está correto
+import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  username: string | null = null; // Inicialmente nulo
-  isAuthenticated: boolean = false; // Estado de autenticação
+  searchQuery: string = '';
+  username: string | null = null;
+  isAuthenticated: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // Inscreva-se nas mudanças de autenticação
     this.authService.getAuthStatus().subscribe((status) => {
       this.isAuthenticated = status;
-      this.username = this.isAuthenticated ? localStorage.getItem('username') : null; // Atualiza o nome do usuário
+      this.username = this.isAuthenticated ? localStorage.getItem('username') : null;
     });
   }
 
   logout(): void {
-    this.authService.logout(); // Chama o método de logout do AuthService
-    this.username = null; // Redefine o nome do usuário
+    this.authService.logout();
+    this.username = null;
+    this.isAuthenticated = false;
+    this.router.navigateByUrl(this.router.url);
   }
+
+  searchAllProducts(event: Event): void {
+    event.preventDefault(); // Previne o comportamento padrão do formulário
+    if (this.searchQuery.trim()) {
+      this.router.navigate(['/products'], { queryParams: { search: this.searchQuery } });
+    } else {
+      alert('Por favor, insira um termo de pesquisa.');
+    }
+  }
+  navigateToLogin(): void {
+    const currentUrl = this.router.url;
+    this.router.navigate(['/login'], { queryParams: { returnUrl: currentUrl } });
+  }
+  
 }

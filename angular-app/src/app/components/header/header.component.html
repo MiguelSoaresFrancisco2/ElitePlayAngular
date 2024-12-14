@@ -36,16 +36,16 @@
           <a class="nav-link" [routerLink]="['/products/category/accessories']">Accessories & Peripherals</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+          <a class="nav-link" routerLink="/admin">Admin</a>
         </li>
         <div *ngIf="isAuthenticated">
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/orders']">My Orders</a>
           </li>
         </div>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search products" aria-label="Search" />
-          <button class="btn btn-outline-light ml-2" type="submit">Search</button>
+        <form (submit)="searchAllProducts($event)">
+          <input type="text" [(ngModel)]="searchQuery" name="search" placeholder="Digite o nome do produto"required/>
+          <button type="submit">Pesquisar</button>
         </form>
         <div *ngIf="isAuthenticated">
           <li class="nav-item">
@@ -58,14 +58,15 @@
       <ul class="navbar-nav ml-auto">
         <div *ngIf="isAuthenticated; else notLoggedIn">
           <li class="nav-item">
-            <span class="navbar-text">Bem-vindo, {{ username }}</span>
+            <span class="navbar-text">Welcome, {{ username }}</span>
           </li>
           <li class="nav-item">
-            <button class="btn btn-outline-light ml-2" (click)="logout()">Logout</button>
+            <button class="btn btn-outline-light" (click)="logout()">Logout</button>
           </li>
         </div>
         <ng-template #notLoggedIn>
-          <a routerLink="login" class="btn btn-outline-light ml-2">Login</a>
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateToLogin()">Login</a>          </li>
         </ng-template>
       </ul>
     </div>
