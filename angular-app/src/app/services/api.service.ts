@@ -30,7 +30,7 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/orders/`, orderData);
   }
   getProductsByCategory(category: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/products/category/${category}`);
+    return this.http.get(`${this.apiUrl}/products/category/${category}/`);
   }
 
   getProductsByName(query: string): Observable<any> {
