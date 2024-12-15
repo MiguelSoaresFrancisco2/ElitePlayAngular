@@ -12,7 +12,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./edit-product.component.css'],
 })
 export class EditProductComponent implements OnInit {
-  productId!: number;
+  productId!: number; // ID do produto a ser editado
+  submitted = false;
+
   product = {
     name: '',
     price: 0,
@@ -29,31 +31,35 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productId = Number(this.route.snapshot.paramMap.get('id'));
-    this.loadProduct();
+    this.loadProduct(); // Chama o método para carregar os dados do produto
   }
 
   loadProduct(): void {
+    // Chama o serviço para obter os detalhes do produto usando o productId
     this.apiService.getProduct(this.productId.toString()).subscribe({
-      next: (response) => {
-        this.product = response;
+      next: (product) => {
+        this.product = product; // Atribua os dados do produto ao seu modelo
       },
       error: (error) => {
-        console.error('Failed to load product:', error);
-        alert('Failed to load product details.');
-      },
+        console.error('Erro ao carregar o produto:', error);
+      }
     });
   }
 
   saveProduct(): void {
-    this.apiService.editProduct(this.productId, this.product).subscribe({
-      next: () => {
-        alert('Product updated successfully!');
-        this.router.navigate(['/admin/manage-products']);
-      },
-      error: (error) => {
-        console.error('Failed to update product:', error);
-        alert('Failed to update product. Please try again.');
-      },
-    });
+    this.submitted = true; // Define como true ao tentar salvar
+    if (this.product.name && this.product.price && this.product.stock_quantity && this.product.description) {
+      // Chame o método para salvar o produto
+      this.apiService.editProduct(this.productId, this.product).subscribe({
+        next: () => {
+          alert('Product updated successfully!');
+          this.router.navigate(['/admin/manage-products']);
+        },
+        error: (error) => {
+          console.error('Failed to update product:', error);
+          alert('Failed to update product. Please try again.');
+        },
+      });
+    }
   }
 }

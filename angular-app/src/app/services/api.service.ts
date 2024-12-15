@@ -56,20 +56,31 @@ export class ApiService {
   addProduct(product: any): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
     };
-    return this.http.post(`${this.apiUrl}/products/`, product, { headers });
+    return this.http.post(`${this.apiUrl}/products/add/`, product, { headers });
   }
-  
+
+
   
   editProduct(productId: number, product: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/products/${productId}/`, product);
+}
+
+
+  deleteProduct(productId: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    };
+    return this.http.delete(`${this.apiUrl}/products/delete/`, {
+      headers,
+      body: { product_id: productId },
+    });
   }
   
-  deleteProduct(productId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/products/${productId}/`);
-  }
   
   
   checkIsAdmin(): Observable<any> {
@@ -82,6 +93,11 @@ export class ApiService {
   
   
   
+  getProductById(productId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/products/${productId}/`);
+}
+
+
 
 
 }

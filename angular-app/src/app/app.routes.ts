@@ -26,7 +26,6 @@ export const routes: Routes = [
     { path: 'admin/products', component: ManageProductsComponent },
     { path: 'admin/add-product', component: AddProductComponent },
     { path: 'admin/edit-product/:id', component: EditProductComponent },
-  
     { path: '**', redirectTo: '' },
 
 ];

@@ -52,4 +52,7 @@ export class ManageProductsComponent implements OnInit {
       });
     }
   }
+  
+  
+  
 }

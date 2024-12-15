@@ -1,64 +1,78 @@
 <main class="container">
-    <h2>Edit Product</h2>
-    <form (submit)="saveProduct()">
+  <h2 class="my-4">Edit Product</h2>
+  <form (submit)="saveProduct()" novalidate>
       <div class="form-group">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          [(ngModel)]="product.name"
-          name="name"
-          class="form-control"
-          required
-        />
+          <label for="name">Name</label>
+          <input
+              type="text"
+              id="name"
+              [(ngModel)]="product.name"
+              name="name"
+              class="form-control"
+              required
+              placeholder="Enter product name"
+          />
+          <div *ngIf="!product.name && submitted" class="text-danger">Name is required.</div>
       </div>
+
       <div class="form-group">
-        <label for="price">Price (€)</label>
-        <input
-          type="number"
-          id="price"
-          [(ngModel)]="product.price"
-          name="price"
-          class="form-control"
-          required
-        />
+          <label for="price">Price (€)</label>
+          <input
+              type="number"
+              id="price"
+              [(ngModel)]="product.price"
+              name="price"
+              class="form-control"
+              required
+              placeholder="Enter product price"
+              min="0"
+          />
+          <div *ngIf="!product.price && submitted" class="text-danger">Price is required.</div>
       </div>
+
       <div class="form-group">
-        <label for="stock_quantity">Stock Quantity</label>
-        <input
-          type="number"
-          id="stock_quantity"
-          [(ngModel)]="product.stock_quantity"
-          name="stock_quantity"
-          class="form-control"
-          required
-        />
+          <label for="stock_quantity">Stock Quantity</label>
+          <input
+              type="number"
+              id="stock_quantity"
+              [(ngModel)]="product.stock_quantity"
+              name="stock_quantity"
+              class="form-control"
+              required
+              placeholder="Enter stock quantity"
+              min="0"
+          />
+          <div *ngIf="!product.stock_quantity && submitted" class="text-danger">Stock quantity is required.</div>
       </div>
+
       <div class="form-group">
-        <label for="description">Description</label>
-        <textarea
-          id="description"
-          [(ngModel)]="product.description"
-          name="description"
-          class="form-control"
-          rows="4"
-          required
-        ></textarea>
+          <label for="description">Description</label>
+          <textarea
+              id="description"
+              [(ngModel)]="product.description"
+              name="description"
+              class="form-control"
+              rows="4"
+              required
+              placeholder="Enter product description"
+          ></textarea>
+          <div *ngIf="!product.description && submitted" class="text-danger">Description is required.</div>
       </div>
+
       <div class="form-group form-check">
-        <input
-          type="checkbox"
-          id="available"
-          [(ngModel)]="product.available"
-          name="available"
-          class="form-check-input"
-        />
-        <label for="available" class="form-check-label">Available</label>
+          <input
+              type="checkbox"
+              id="available"
+              [(ngModel)]="product.available"
+              name="available"
+              class="form-check-input"
+          />
+          <label for="available" class="form-check-label">Available</label>
       </div>
+
       <button type="submit" class="btn btn-primary">Update</button>
       <button type="button" class="btn btn-secondary" (click)="router.navigate(['/admin/manage-products'])">
-        Cancel
+          Cancel
       </button>
-    </form>
-  </main>
-  
+  </form>
+</main>
