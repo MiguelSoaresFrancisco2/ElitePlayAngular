@@ -75,9 +75,8 @@ export class ApiService {
       'Content-Type': 'application/json',
       Authorization: `Token ${token}`,
     };
-    return this.http.delete(`${this.apiUrl}/products/delete/`, {
+    return this.http.delete(`${this.apiUrl}/products/delete/${productId}/`, {
       headers,
-      body: { product_id: productId },
     });
   }
   
