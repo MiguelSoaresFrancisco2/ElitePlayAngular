@@ -65,7 +65,12 @@ export class ApiService {
 
   
   editProduct(productId: number, product: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/products/${productId}/`, product);
+    const token = localStorage.getItem('authToken');
+    const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+    };
+    return this.http.put(`${this.apiUrl}/products/update/${productId}/`, product, { headers });
 }
 
 
@@ -93,7 +98,7 @@ export class ApiService {
   
   
   getProductById(productId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/products/${productId}/`);
+    return this.http.get(`${this.apiUrl}/products/id/${productId}/`);
 }
 
 

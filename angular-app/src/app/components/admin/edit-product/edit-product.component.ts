@@ -19,6 +19,7 @@ export class EditProductComponent implements OnInit {
     available: true,
     description: '',
     stock_quantity: 0,
+    image_url: '',
   };
   submitted = false; // Para controle de validação
 
@@ -35,7 +36,7 @@ export class EditProductComponent implements OnInit {
 
   loadProduct(): void {
     // Chama o serviço para obter os detalhes do produto usando o productId
-    this.apiService.getProduct(this.productId.toString()).subscribe({
+    this.apiService.getProductById(this.productId).subscribe({
       next: (product) => {
         this.product = product; // Atribua os dados do produto ao seu modelo
       },
