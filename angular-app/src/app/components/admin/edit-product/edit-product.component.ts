@@ -19,7 +19,6 @@ export class EditProductComponent implements OnInit {
     available: true,
     description: '',
     stock_quantity: 0,
-    image_url: '',
   };
   submitted = false; // Para controle de validação
 
