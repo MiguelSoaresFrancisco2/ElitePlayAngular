@@ -1,0 +1,30 @@
+<main class="container">
+  <h2>Review List - Admin</h2>
+
+  <table *ngIf="reviews.length > 0; else noReviews" class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Author</th>
+        <th>Rating</th>
+        <th>Date</th>
+        <th>Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let review of reviews">
+        <td>{{ review.id }}</td>
+        <td>{{ review.product.name || review.product }}</td>
+        <td>{{ review.author }}</td>
+        <td>{{ review.rating }}/5</td>
+        <td>{{ review.created_date }}</td>
+        <td>{{ truncateText(review.text, 20) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noReviews>
+    <p>No reviews available.</p>
+  </ng-template>
+</main>

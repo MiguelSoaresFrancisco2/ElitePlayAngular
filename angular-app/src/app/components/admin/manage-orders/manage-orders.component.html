@@ -1,0 +1,31 @@
+<main class="container">
+  <h2>Order List - Admin</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Total (€)</th>
+        <th>Order Date</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor para iterar sobre a lista de encomendas -->
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.user.username }}</td>
+        <td>{{ order.total }}</td>
+        <td>{{ order.created_at }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="navigateTo('/admin/order-details/' + order.id)">
+            View Details
+            </button>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

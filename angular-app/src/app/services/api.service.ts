@@ -98,6 +98,25 @@ export class ApiService {
 }
 
 
+getAllReviews(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/reviews/`);
+}
+
+getOrders(): Observable<any> {
+  const token = localStorage.getItem('authToken');
+  const headers = {
+    Authorization: `Token ${token}`,
+  };
+  return this.http.get(`${this.apiUrl}/orders/admin/`, { headers });
+}
+getOrderDetails(orderId: string | number): Observable<any> {
+  const token = localStorage.getItem('authToken');
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Token ${token}`,
+  };
+  return this.http.get(`${this.apiUrl}/orders/${orderId}/`, { headers });
+}
 
 
 }

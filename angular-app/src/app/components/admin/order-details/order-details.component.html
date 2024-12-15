@@ -1,0 +1,29 @@
+<main class="container">
+  <h2>Order Details - {{ order?.id }}</h2>
+
+  <p><strong>User:</strong> {{ order?.user?.username }}</p>
+  <p><strong>Total:</strong> {{ order?.total | currency: 'EUR' }}</p>
+  <p><strong>Order Date:</strong> {{ order?.created_at }}</p>
+
+  <h3>Order Items</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Unit Price (€)</th>
+        <th>Total (€)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.product_name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.product_price | currency: 'EUR' }}</td>
+        <td>{{ item.total_price | currency: 'EUR' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-secondary" (click)="goBack()">Back to Orders</button>
+</main>
