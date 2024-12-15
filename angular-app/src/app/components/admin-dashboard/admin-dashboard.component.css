@@ -1,6 +1,10 @@
 .container {
     max-width: 900px;
   }
+
+  .container h2 {
+    color: #f8f9fa;
+  }
   
   .card {
     border: none;
