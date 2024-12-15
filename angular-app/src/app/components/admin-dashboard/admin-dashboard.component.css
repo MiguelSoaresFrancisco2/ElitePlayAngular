@@ -1,0 +1,19 @@
+.container {
+    max-width: 900px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    background: #f8f9fa;
+  }
+  
+  .card-body h3 {
+    font-size: 1.5rem;
+  }
+  
+  .card-body p {
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  

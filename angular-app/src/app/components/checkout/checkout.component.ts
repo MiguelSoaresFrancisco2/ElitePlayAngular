@@ -12,49 +12,78 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
+  notificationMessage: string | null = null;
   cartItems: any[] = [];
   subtotal: number = 0;
-  tax: number = 0;
-  shipping: number = 5; // Valor fixo de envio
   total: number = 0;
   payment = {
     cardNumber: '',
     expirationDate: '',
     cvv: '',
   };
+  isError: boolean = false;
 
   constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
-    // Obtém os itens do carrinho
-    this.cartItems = this.cartService.getCartItems();
-    this.calculateTotals();
+    this.cartService.getCart().subscribe({
+      next: (response) => {
+        this.cartItems = response.items || [];
+        this.calculateTotals();
+      },
+      error: () => {
+        console.error('Erro ao carregar os itens do carrinho.');
+      },
+    });
   }
+  
 
   calculateTotals(): void {
-    this.subtotal = this.cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
-    this.tax = this.subtotal * 0.05; // 5% de imposto
-    this.total = this.subtotal + this.tax + this.shipping;
+    this.subtotal = this.cartItems.reduce(
+      (sum, item) => sum + item.product.price * item.quantity,
+      0
+    );
+    
+    this.total = this.subtotal ;
   }
+  
 
   processCheckout(event: Event): void {
     event.preventDefault();
-
-    // Validação simples da data de validade
+  
+    // Validação da data de validade
     const [year, month] = this.payment.expirationDate.split('-').map(Number);
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
-
+  
     if (year < currentYear || (year === currentYear && month < currentMonth)) {
-      alert('The expiration date must be in the current month or in the future.');
+      this.showNotification('The expiration date must be in the current month or in the future.', true);
       return;
     }
+  
+    // Processar pagamento e criar ordem
+    this.cartService.createOrder().subscribe({
+      next: () => {
+        this.showNotification('Order placed successfully!');
+        this.cartService.clearCart().subscribe(() => {
+          this.router.navigate(['/orders']); // Redireciona para a página "My Orders"
+        });
+      },
+      error: () => {
+        this.showNotification('Failed to place the order. Please try again.', true);
+      },
+    });
+  }
+  
 
-    // Simula o processamento de pagamento
-    console.log('Processing payment...', this.payment);
-    alert('Payment successful!');
-    this.cartService.clearCart();
-    this.router.navigate(['/']);
+  showNotification(message: string, isError: boolean = false): void {
+    this.notificationMessage = message;
+    this.isError = isError;
+
+    setTimeout(() => {
+      this.notificationMessage = null;
+      this.isError = false;
+    }, 3000);
   }
 }

@@ -9,6 +9,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:8000/api'; 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
+
   constructor(private http: HttpClient) {}
 
   login(credentials: { username: string; password: string }): Observable<any> {

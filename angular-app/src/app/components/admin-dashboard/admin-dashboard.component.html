@@ -1,0 +1,49 @@
+<main class="container mt-5">
+    <h2 class="text-center">Admin Dashboard</h2>
+    <div class="row">
+      <!-- Manage Products -->
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <h3>Manage Products</h3>
+            <p>Add, edit, or delete products.</p>
+            <button class="btn btn-primary" (click)="navigateTo('/admin/products')">Manage Products</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- View Orders -->
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <h3>Orders</h3>
+            <p>View and manage customer orders.</p>
+            <button class="btn btn-primary" (click)="navigateTo('/admin/orders')">View Orders</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Sales Statistics -->
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <h3>Sales Statistics</h3>
+            <p>View sales performance and trends.</p>
+            <button class="btn btn-primary" (click)="navigateTo('/admin/statistics')">View Statistics</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Product Reviews -->
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <h3>Product Reviews</h3>
+            <p>Manage product reviews.</p>
+            <button class="btn btn-primary" (click)="navigateTo('/admin/reviews')">Manage Reviews</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  

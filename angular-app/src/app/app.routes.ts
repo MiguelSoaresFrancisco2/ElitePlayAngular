@@ -5,6 +5,12 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ManageProductsComponent } from './components/admin/manage-products/manage-products.component';
+import { AddProductComponent } from './components/admin/add-product/add-product.component';
+import { EditProductComponent } from './components/admin/edit-product/edit-product.component';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -15,6 +21,12 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'cart', component: CartComponent },
     { path: 'checkout', component: CheckoutComponent },
+    { path: 'orders', component: OrdersComponent }, 
+    { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard], },
+    { path: 'admin/products', component: ManageProductsComponent },
+    { path: 'admin/add-product', component: AddProductComponent },
+    { path: 'admin/edit-product/:id', component: EditProductComponent },
+  
     { path: '**', redirectTo: '' },
 
 ];

@@ -13,7 +13,7 @@ export class ApiService {
   getProducts(): Observable<any> {
     return this.http.get(`${this.apiUrl}/products/`);
   }
-
+  
   getProduct(slug: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/products/${slug}/`);
   }
@@ -53,8 +53,32 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/products/${slug}/reviews/`, reviewData);
   }
 
+  addProduct(product: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    };
+    return this.http.post(`${this.apiUrl}/products/`, product, { headers });
+  }
   
   
+  editProduct(productId: number, product: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/products/${productId}/`, product);
+  }
+  
+  deleteProduct(productId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/products/${productId}/`);
+  }
+  
+  
+  checkIsAdmin(): Observable<any> {
+    const token = localStorage.getItem('authToken'); // Obtém o token do localStorage
+    const headers = {
+      Authorization: `Token ${token}`,
+    };
+    return this.http.get<any>('http://localhost:8000/api/check-admin/', { headers });
+  }
   
   
   

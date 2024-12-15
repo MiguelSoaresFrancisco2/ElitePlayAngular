@@ -1,3 +1,6 @@
+<div *ngIf="notificationMessage" class="notification alert" [ngClass]="{'alert-success': !isError, 'alert-danger': isError}">
+  {{ notificationMessage }}
+</div>
 <main role="main" class="container">
     <h2>Checkout</h2>
   
@@ -10,13 +13,11 @@
         >
           <span>
             {{ item.product.name }} - {{ item.quantity }} x {{ item.product.price | currency:'EUR' }}
-            = {{ item.totalPrice | currency:'EUR' }}
+            
           </span>
         </li>
       </ul>
-      <p>Subtotal: {{ subtotal | currency:'EUR' }}</p>
-      <p>Tax (5%): {{ tax | currency:'EUR' }}</p>
-      <p>Shipping: {{ shipping | currency:'EUR' }}</p>
+     
       <p><strong>Total: {{ total | currency:'EUR' }}</strong></p>
   
       <h3>Payment Information</h3>

@@ -1,0 +1,38 @@
+<main role="main" class="container">
+    <h2 class="orders-title">My Orders</h2>
+  
+    <style>
+      .list-group-item h5,
+      .list-group-item h6,
+      .list-group-item p,
+      .list-group-item li {
+        color: #333333; /* Ajuste a cor do texto */
+      }
+    </style>
+  
+    <!-- Verifica se há ordens -->
+    <div *ngIf="orders && orders.length > 0; else noOrders">
+      <ul class="list-group mb-4">
+        <li *ngFor="let order of orders" class="list-group-item">
+          <h5>Order</h5>
+          <p><strong>Date:</strong> {{ order.created_at | date: 'medium' }}</p>
+          <p><strong>Total:</strong> {{ order.total | currency: 'EUR' }}</p>
+          <h6>Items:</h6>
+          <ul>
+            <!-- Itera sobre os itens da ordem -->
+            <li *ngFor="let item of order.items">
+              {{ item.product_name }} - {{ item.quantity }} x
+              {{ item.product_price | currency: 'EUR' }} =
+              {{ item.total_price | currency: 'EUR' }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Mensagem caso não existam ordens -->
+    <ng-template #noOrders>
+      <p>You have no orders.</p>
+    </ng-template>
+  </main>
+  
