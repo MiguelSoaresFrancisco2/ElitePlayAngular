@@ -1,24 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = 'http://localhost:8000/api/cart/'; // Inclui a barra final
+  private apiUrl = 'http://localhost:8000/api/cart/'; // URL base do endpoint do carrinho
   private cart: any[] = [];
 
   constructor(private http: HttpClient) {
+    // Carrega o carrinho salvo no localStorage, se existir
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       this.cart = JSON.parse(savedCart);
     }
   }
 
+  // Configurar cabeçalhos com token de autenticação
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken'); // Agora 'authToken' será usado
+    if (!token) {
+      console.error('Token de autenticação não encontrado no localStorage.');
+    }
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    });
+  }
+  
+
   // Obter itens do carrinho do backend
   getCart(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    const headers = this.getHeaders();
+    return this.http.get(this.apiUrl, { headers });
   }
 
   // Obter itens armazenados localmente
@@ -27,26 +42,42 @@ export class CartService {
   }
 
   // Adicionar item ao carrinho (backend e localStorage)
-  addToCart(product: any, quantity: number = 1): Observable<any> {
-    const payload = { product: product.id, quantity };
-    console.log('Payload enviado:', payload); // Para verificar os dados no console
-    return this.http.post(this.apiUrl, { item: payload });
+  addToCart(product: any, quantity: number): Observable<any> {
+    const headers = this.getHeaders(); // Inclui o cabeçalho com o token
+    const payload = {
+      item: {
+        product: product.id, // ID do produto
+        quantity: quantity,  // Quantidade desejada
+      },
+    };
+    console.log('Payload enviado:', payload); // Debug do payload
+    return this.http.post(this.apiUrl, payload, { headers }); // POST para o endpoint do carrinho
   }
 
   // Atualizar quantidade de um item no carrinho
   updateCartItem(productId: number, quantity: number): Observable<any> {
-    const payload = { id: productId, quantity };
-    return this.http.put(this.apiUrl, { item: payload });
+    const headers = this.getHeaders(); // Inclui o cabeçalho com o token
+    const payload = {
+      item: {
+        product: productId, // ID do produto
+        quantity: quantity, // Quantidade atualizada
+      },
+    };
+    return this.http.put(this.apiUrl, payload, { headers });
   }
+  
 
   // Remover item do carrinho
   removeCartItem(productId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${productId}/`);
+    const headers = this.getHeaders(); // Inclui o cabeçalho com o token
+    const payload = { product_id: productId }; // Envia o ID do produto no corpo
+    return this.http.delete(this.apiUrl, { headers, body: payload });
   }
-
+  
   // Limpar o carrinho
   clearCart(): Observable<any> {
-    return this.http.delete(this.apiUrl);
+    const headers = this.getHeaders();
+    return this.http.delete(this.apiUrl, { headers });
   }
 
   // Calcular o total dos itens do carrinho

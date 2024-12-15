@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   cartItems: any[] = [];
   total: number = 0;
   notificationMessage: string | null = null;
-  isError: boolean = false; // Para diferenciar notificações de sucesso e erro
+  isError: boolean = false;
 
   constructor(private cartService: CartService, private router: Router) {}
 
@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
     this.updateCart();
   }
 
+  // Incrementa a quantidade de um item
   incrementQuantity(productId: number): void {
     const item = this.cartItems.find((i) => i.product.id === productId);
     if (item) {
@@ -37,6 +38,7 @@ export class CartComponent implements OnInit {
     }
   }
 
+  // Decrementa a quantidade de um item
   decrementQuantity(productId: number): void {
     const item = this.cartItems.find((i) => i.product.id === productId);
     if (item && item.quantity > 1) {
@@ -46,29 +48,33 @@ export class CartComponent implements OnInit {
           this.showNotification(`Quantidade de ${item.product.name} reduzida!`);
         },
         error: () => {
-          this.showNotification('Erro ao atualizar a quantidade.', true);
+          this.showNotification('Erro ao diminuir a quantidade.', true);
         },
       });
     } else if (item && item.quantity === 1) {
       this.removeFromCart(productId);
     }
   }
+  
 
+  // Remove um item do carrinho
   removeFromCart(productId: number): void {
     const item = this.cartItems.find((i) => i.product.id === productId);
     if (item) {
       this.cartService.removeCartItem(productId).subscribe({
         next: () => {
           this.updateCart();
-          this.showNotification(`${item.product.name} removido do carrinho.`);
+          this.showNotification(`${item.product.name} foi removido do carrinho.`);
         },
         error: () => {
-          this.showNotification('Erro ao remover o item do carrinho.', true);
+          this.showNotification('Erro ao remover o produto do carrinho.', true);
         },
       });
     }
   }
+  
 
+  // Redireciona para a página de checkout
   proceedToCheckout(): void {
     if (this.cartItems.length > 0) {
       this.router.navigate(['/checkout']);
@@ -77,6 +83,7 @@ export class CartComponent implements OnInit {
     }
   }
 
+  // Atualiza os itens do carrinho e calcula o total
   updateCart(): void {
     this.cartService.getCart().subscribe({
       next: (response) => {
@@ -92,6 +99,7 @@ export class CartComponent implements OnInit {
     });
   }
 
+  // Exibe notificações
   showNotification(message: string, isError: boolean = false): void {
     this.notificationMessage = message;
     this.isError = isError;

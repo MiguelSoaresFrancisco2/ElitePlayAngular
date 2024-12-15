@@ -1,0 +1,42 @@
+.cart {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #202020;
+    color: #fff;
+    border-radius: 10px;
+  }
+  
+  .cart h2 {
+    color: #ff4500;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .quantity-controls button {
+    min-width: 30px;
+  }
+  
+  .notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  .notification.alert-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .notification.alert-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .text-end {
+    margin-top: 20px;
+  }
+  

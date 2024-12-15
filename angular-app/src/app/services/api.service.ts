@@ -53,21 +53,6 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/products/${slug}/reviews/`, reviewData);
   }
 
-  addToCart(item: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/cart/`, { item });
-  }
-  
-  updateCartItem(item: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/cart/`, { item });
-  }
-  
-  removeCartItem(itemId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/cart/${itemId}/`);
-  }
-  
-  clearCart(): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/cart/`);
-  }
   
   
   

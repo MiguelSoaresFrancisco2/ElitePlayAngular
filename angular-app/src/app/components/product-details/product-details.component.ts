@@ -70,20 +70,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(): void {
-    if (!this.product) {
-      this.showNotification('Produto inválido.', true);
-      return;
-    }
-  
     if (this.quantity > 0) {
       this.cartService.addToCart(this.product, this.quantity).subscribe({
         next: () => {
-          this.showNotification(
-            `${this.quantity} ${this.product.name}(s) adicionados ao carrinho!`
-          );
+          this.showNotification(`${this.quantity} ${this.product.name}(s) adicionados ao carrinho!`);
         },
         error: (err) => {
-          this.showNotification(`Erro ao adicionar ao carrinho: ${err.message}`, true);
+          this.showNotification('Erro ao adicionar ao carrinho.', true);
           console.error('Erro ao adicionar ao carrinho:', err);
         },
       });
@@ -91,6 +84,7 @@ export class ProductDetailsComponent implements OnInit {
       this.showNotification('Por favor, insira uma quantidade válida.', true);
     }
   }
+  
   
 
   submitReview(): void {

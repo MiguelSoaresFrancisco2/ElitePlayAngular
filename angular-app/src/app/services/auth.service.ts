@@ -21,16 +21,16 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken'); // Use 'authToken' como chave
     this.isAuthenticatedSubject.next(false); // Atualiza o estado de autenticação
   }
 
   setToken(token: string): void {
-    localStorage.setItem('token', token);
+    localStorage.setItem('authToken', token); // Use 'authToken' como chave
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('authToken'); // Use 'authToken' como chave
   }
 
   isAuthenticated(): boolean {
