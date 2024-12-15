@@ -55,7 +55,7 @@
               rows="4"
               required
               placeholder="Enter product description"
-          ></textarea>
+          ></textarea> <!-- Aqui está o fechamento correto da tag -->
           <div *ngIf="!product.description && submitted" class="text-danger">Description is required.</div>
       </div>
 

@@ -13,8 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class EditProductComponent implements OnInit {
   productId!: number; // ID do produto a ser editado
-  submitted = false;
-
   product = {
     name: '',
     price: 0,
@@ -22,11 +20,12 @@ export class EditProductComponent implements OnInit {
     description: '',
     stock_quantity: 0,
   };
+  submitted = false; // Para controle de validação
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    public router: Router // Alterado para 'public' para evitar erros no template
+    public router: Router
   ) {}
 
   ngOnInit(): void {
