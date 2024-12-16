@@ -6,9 +6,9 @@
   <h1>{{ product?.name }}</h1>
 
   <!-- Imagem do Produto -->
-  <div *ngIf="product?.image">
+  <div *ngIf="product?.image_url">
     <img
-      [src]="product.image.url"
+      [src]="product.image_url"
       alt="{{ product.name }}"
       class="img-fluid mb-4"
       style="max-width: 100%; height: auto;"

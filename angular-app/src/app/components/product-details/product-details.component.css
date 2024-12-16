@@ -15,3 +15,10 @@
     border-color: #f5c6cb;
   }
   
+  h1, h2, h3, p, li {
+    color: #f8f9fa;
+  }
+
+  label {
+    color: #78797a;
+  }
