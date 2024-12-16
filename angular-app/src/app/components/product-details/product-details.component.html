@@ -64,7 +64,7 @@
   <!-- Adicionar Nova Review -->
   <hr />
   <h2>Adicionar Review</h2>
-  <form *ngIf="isAuthenticated; else loginPrompt" (submit)="submitReview()">
+  <form *ngIf="isAuthenticated; else loginPrompt" (submit)="submitReview(product.id)">
     <div class="form-group">
       <label for="reviewRating">Avaliação:</label>
       <select

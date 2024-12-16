@@ -45,12 +45,12 @@ export class ApiService {
   
     return this.http.get(`${this.apiUrl}/products/`, { params });
   }
-  getReviews(productSlug: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/products/${productSlug}/reviews/`);
+  getReviews(productId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/products/${productId}/reviews/`);
   }
     
-  createReview(slug: string, reviewData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/products/${slug}/reviews/`, reviewData);
+  createReview(productId: number , reviewData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/products/${productId}/reviews/`, reviewData);
   }
 
   addProduct(product: any): Observable<any> {

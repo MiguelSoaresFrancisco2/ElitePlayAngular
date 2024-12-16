@@ -33,10 +33,10 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const productSlug = this.route.snapshot.paramMap.get('slug');
-    if (productSlug) {
-      this.loadProductDetails(productSlug);
-      this.loadReviews(productSlug);
+    const productId = Number(this.route.snapshot.paramMap.get('id'));
+    if (productId) {
+      this.loadProductDetails(productId);
+      this.loadReviews(productId);
     }
 
     this.isAuthenticated = this.authService.isAuthenticated();
@@ -45,8 +45,8 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  loadProductDetails(slug: string): void {
-    this.apiService.getProduct(slug).subscribe({
+  loadProductDetails(id: number): void {
+    this.apiService.getProductById(id).subscribe({
       next: (data) => {
         this.product = data;
       },
@@ -57,8 +57,8 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  loadReviews(slug: string): void {
-    this.apiService.getReviews(slug).subscribe({
+  loadReviews(id: number): void {
+    this.apiService.getReviews(id).subscribe({
       next: (data) => {
         this.reviews = data;
       },
@@ -87,7 +87,7 @@ export class ProductDetailsComponent implements OnInit {
   
   
 
-  submitReview(): void {
+  submitReview(id: number): void {
     if (!this.isAuthenticated) {
       alert('Você precisa estar logado para enviar uma review.');
       this.router.navigate(['/login']);
@@ -100,7 +100,7 @@ export class ProductDetailsComponent implements OnInit {
       rating: this.reviewRating,
     };
 
-    this.apiService.createReview(this.product.slug, reviewData).subscribe({
+    this.apiService.createReview(id, reviewData).subscribe({
       next: (data) => {
         this.reviews.push(data);
         this.reviewText = '';
