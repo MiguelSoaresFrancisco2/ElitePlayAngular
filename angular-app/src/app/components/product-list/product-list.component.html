@@ -39,11 +39,11 @@
   </div>
 
   <!-- Títulos -->
-  <h2 *ngIf="category; else allProducts">
+  <h2 *ngIf="category; else allProducts" style="color: red;">
     Produtos na categoria: {{ category }}
   </h2>
-  <ng-template #allProducts>
-    <h2>Todos os Produtos</h2>
+  <ng-template #allProducts >
+    <h2 style="color: red;">Todos os Produtos </h2>
   </ng-template>
 
   <!-- Lista de Produtos -->
