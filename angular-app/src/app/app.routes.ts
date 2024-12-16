@@ -14,7 +14,6 @@ import { AdminGuard } from './guards/admin.guard';
 import {ReviewsComponent } from './components/admin/manage-reviews/manage-reviews.component';
 import { ManageOrdersComponent } from './components/admin/manage-orders/manage-orders.component';
 import { OrderDetailsComponent } from './components/admin/order-details/order-details.component';
-import { AdminStatisticsComponent } from './components/admin/admin-statistics/admin-statistics.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -33,8 +32,6 @@ export const routes: Routes = [
     { path: 'admin/manage-reviews', component: ReviewsComponent },
     { path: 'admin/manage-orders', component: ManageOrdersComponent },
     { path: 'admin/order-details/:id', component: OrderDetailsComponent },
-    { path: 'admin/statistics', component: AdminStatisticsComponent },
-
     { path: '**', redirectTo: '' },
 
 ];
