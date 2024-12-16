@@ -49,9 +49,16 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/products/${productId}/reviews/`);
   }
     
-  createReview(productId: number , reviewData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/products/${productId}/reviews/`, reviewData);
+  createReview(productId: number, reviewData: any): Observable<any> {
+    const token = localStorage.getItem('authToken'); // Obtém o token do localStorage
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    };
+  
+    return this.http.post(`${this.apiUrl}/products/${productId}/reviews/`, reviewData, { headers });
   }
+  
 
   addProduct(product: any): Observable<any> {
     const token = localStorage.getItem('authToken');
