@@ -32,3 +32,13 @@
 .table tr:hover {
   background-color: #e9ecef;
 }
+
+.btn-primary {
+  background-color: #78797a;
+  border: none;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #58595a;
+}
