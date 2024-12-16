@@ -60,7 +60,7 @@
           <p class="card-text">{{ product.description }}</p>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-muted">{{ product.price | currency }}</span>
-            <a [routerLink]="['/product', product.slug]" class="btn btn-primary">
+            <a [routerLink]="['/product', product.id]" class="btn btn-primary">
               View More
             </a>
           </div>
