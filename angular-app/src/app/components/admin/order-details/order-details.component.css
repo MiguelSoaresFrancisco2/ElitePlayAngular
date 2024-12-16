@@ -1,0 +1,23 @@
+/* Define as cores para o conteúdo principal */
+.container h2,
+.container p,
+.container h3 {
+  color: white; /* Letras em branco */
+}
+
+/* Estilize a tabela */
+.table-striped th {
+  background-color: #f8f9fa; /* Cor de fundo dos cabeçalhos da tabela */
+  color: black; /* Letras em preto no cabeçalho */
+}
+
+.table-striped td {
+  color: black; /* Letras em preto nos dados da tabela */
+}
+
+/* Botão Voltar */
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
