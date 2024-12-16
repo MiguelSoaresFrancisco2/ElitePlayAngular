@@ -1,7 +1,7 @@
 <div *ngIf="products.length > 0 || (filtersActive && !category); else noProducts">
   <!-- Filtros -->
   <div *ngIf="filtersActive && !category" class="filters">
-    <form (submit)="applyFilters($event)">
+    <form (submit)="applyFilters($event)" class="search-form">
       <div>
         <label for="search">Search products</label>
         <input

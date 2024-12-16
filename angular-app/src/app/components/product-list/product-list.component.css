@@ -1,7 +1,7 @@
 .card {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Altura total do card */
+    height: 90%; /* Altura total do card */
     max-width: 300px; /* Define uma largura máxima para os cards */
     margin: 15px; /* Espaçamento entre os cards */
 } 
@@ -34,4 +34,19 @@ label {
 .card-title {
     font-size: 1.2em;
     color: #333;
+}
+
+.search-form {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #ff0000;
+    border-color: #cc0000;
+}
+
+.btn-primary:hover {
+    background-color: #dd0000;
+    border-color: #cc0000;
 }
