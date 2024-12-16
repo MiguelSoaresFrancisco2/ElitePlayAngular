@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'; // Importa o FormsModule
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-product-list',
   standalone: true,

@@ -130,4 +130,13 @@ getOrderDetails(orderId: string | number): Observable<any> {
 }
 
 
+getSalesStatistics(): Observable<any> {
+  const token = localStorage.getItem('authToken'); // Obtém o token armazenado
+  const headers = {
+    Authorization: `Token ${token}`, // Adiciona o token ao cabeçalho
+  };
+  return this.http.get(`${this.apiUrl}/admin/statistics/`, { headers });
+}
+
+
 }

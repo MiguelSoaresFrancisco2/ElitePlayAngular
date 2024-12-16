@@ -1,0 +1,52 @@
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Sales Statistics</h2>
+  
+    <div class="row text-center mb-5">
+      <!-- Total Sales -->
+      <div class="col-md-4">
+        <div class="card shadow-sm large-card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Total Sales</h5>
+            <p class="card-text display-4">{{ totalSales }} €</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Number of Orders -->
+      <div class="col-md-4">
+        <div class="card shadow-sm large-card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Number of Orders</h5>
+            <p class="card-text display-4">{{ totalOrders }} order(s)</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Featured Product -->
+      <div class="col-md-4">
+        <div class="card shadow-sm large-card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Featured Product</h5>
+            <p class="card-text display-6">{{ topProduct?.product_name }}</p>
+            <p class="card-text display-6">Quantity: {{ topProduct?.total_quantity }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <h3 class="mb-4">Sales Charts</h3>
+    <div class="mb-4">
+      <label for="chartSelector">Select chart type:</label>
+      <select id="chartSelector" class="form-control w-25" (change)="onChartTypeChange($event)">
+        <option value="product">Sales by Product</option>
+        <option value="category">Sales by Category</option>
+      </select>
+    </div>
+  
+    <div class="row">
+      <div class="col-lg-12">
+        <canvas id="salesChart" width="100%" height="50"></canvas>
+      </div>
+    </div>
+  </div>
+  
