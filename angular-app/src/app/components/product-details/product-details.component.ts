@@ -95,6 +95,7 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     const reviewData = {
+      
       author: this.username,
       text: this.reviewText,
       rating: this.reviewRating,
