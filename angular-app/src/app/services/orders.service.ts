@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class OrdersService {
-  private apiUrl = 'http://localhost:8000/api/orders/user/'; // Endpoint para obter pedidos do usuário
+  private apiUrl = 'https://neorabbit.pythonanywhere.com/api/orders/user/'; // Endpoint para obter pedidos do usuário
 
   constructor(private http: HttpClient) {}
 

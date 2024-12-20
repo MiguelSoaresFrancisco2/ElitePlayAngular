@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = 'http://localhost:8000/api/cart/'; // URL base do endpoint do carrinho
+  private apiUrl = 'https://neorabbit.pythonanywhere.com/api/cart/'; // URL base do endpoint do carrinho
   private cart: any[] = [];
 
   constructor(private http: HttpClient) {

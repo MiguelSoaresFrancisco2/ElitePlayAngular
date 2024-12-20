@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8000/api'; // Substitua pela URL correta do backend
+  private apiUrl = 'https://neorabbit.pythonanywhere.com/api'; // Substitua pela URL correta do backend
 
   constructor(private http: HttpClient) {}
 
