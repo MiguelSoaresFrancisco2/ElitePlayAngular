@@ -98,7 +98,7 @@ export class CartService {
 
   createOrder(): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.post(`${this.apiUrl}/orders/create/`, {}, { headers });
+    return this.http.post('https://neorabbit.pythonanywhere.com/api/orders/create/', {}, { headers });
   }
   
 }

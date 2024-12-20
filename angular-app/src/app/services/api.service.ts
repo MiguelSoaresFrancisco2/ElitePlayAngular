@@ -99,7 +99,7 @@ export class ApiService {
     const headers = {
       Authorization: `Token ${token}`,
     };
-    return this.http.get<any>(`${this.apiUrl} /api/check-admin/`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/check-admin/`, { headers });
   }
   
   
